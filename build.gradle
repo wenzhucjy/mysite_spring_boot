@@ -1,0 +1,73 @@
+
+allprojects {
+    
+    group 'com.github.wenzhucjy'
+    version '1.0-SNAPSHOT'
+
+    apply plugin: 'idea'
+}
+
+/*
+ subprojects 共同的插件、repositories、依赖版本以及依赖配置
+ */
+subprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    //apply plugin: 'checkstyle'
+    
+    compileJava.options.encoding = 'UTF-8'
+
+    repositories {
+
+        // 依赖是从本地的Maven仓库中获取的
+//        mavenLocal()
+//        mavenCentral()
+
+        maven {
+            url "http://172.16.100.95:8091/nexus/content/groups/public/"
+        }
+        //使用开源中国的maven仓库
+//        maven { url 'http://maven.oschina.net/content/groups/public/' }
+    }
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+
+    ext {
+        guavaVersion = '19.0'
+        jodatimeVersion = '2.8.2'
+    }
+    
+    
+    dependencies {
+        //导入本地的依赖包
+       //compile fileTree(dir: 'libs', include: ['*.jar'])
+
+        //从maven仓库导入依赖
+        compile(
+                //group: 'xxx', name: 'xxx', version: 'xxx'
+                "org.slf4j:slf4j-api:1.7.12",
+                "bouncycastle:bcmail-jdk16:140",
+                "commons-codec:commons-codec:1.10",
+                "org.apache.commons:commons-lang3:3.4",
+                "commons-fileupload:commons-fileupload:1.3.1",
+                "com.google.guava:guava:${guavaVersion}",
+                "joda-time:joda-time:${jodatimeVersion}",
+                'ch.qos.logback:logback-core:1.1.6',
+                'net.coobird:thumbnailator:0.4.8',
+                'com.fasterxml.jackson.core:jackson-core:2.4.6',
+                'com.fasterxml.jackson.core:jackson-databind:2.4.6',
+                'dom4j:dom4j:1.6.1',
+                'org.mybatis:mybatis:3.3.0',
+                'com.alibaba:fastjson:1.2.7'
+
+        )
+        testCompile ("junit:junit:4.12")
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.9'
+}

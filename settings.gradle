@@ -1,0 +1,10 @@
+//通过目录来添加子项目
+include 'mysite_common','mysite_web'
+
+//设置根项目的名字
+//rootProject.name = 'mysite'
+
+//迭代访问所有根目录下的子项目，设置自定义的构建脚本名称
+//rootProject.children.each {
+//    it.buildFileName = it.name + '.gradle' - 'comet-'
+//}

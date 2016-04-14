@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- profile active -->
+      <springProfile name="development">
+           <!-- configuration to be enabled when the "development" profile is active -->
+        <property name="LOG_DIR" value="/var/log/mysite2.0"/>
+       </springProfile>
+        <springProfile name="production">
+            <!-- configuration to be enabled when the "production" profile is active -->
+            <property name="LOG_DIR" value="/data/mysite/tools/mysite_logs/tomcat_logs"/>
+        </springProfile>
+    <!-- use defaults configure -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+
+    
+    <!-- project default level -->
+    <logger name="com.mysite" level="DEBUG"/>
+    
+    <!--pattern log with yyyyMMdd'T'HHmmss-->
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+    
+    <appender name="FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <file>${LOG_DIR}/mysite${bySecond}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/mysite${bySecond}.%d{yyyy-MM-dd}.log.%i</fileNamePattern>
+        </rollingPolicy>
+        <triggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>5MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+    
+    <!-- springframework error log -->
+    <appender name="springAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/mysite.spring.${bySecond}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/mysite.spring.${bySecond}.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- show spring DEBUG/ERROR info -->
+    <logger name="org.springframework" level="ERROR" additivity="false">
+        <appender-ref ref="springAppender"/>
+    </logger>
+    
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>

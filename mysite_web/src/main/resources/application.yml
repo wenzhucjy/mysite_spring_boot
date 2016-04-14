@@ -1,0 +1,17 @@
+spring:
+  thymeleaf:
+    cache: false
+    mode:  HTML5
+    prefix: /WEB-INF/
+    template-resolver-order: 1
+  mvc:
+      favicon:
+        enabled: false
+
+logging:
+  config: classpath:logback-spring.xml
+
+
+endpoints:
+  jmx:
+    enabled: false

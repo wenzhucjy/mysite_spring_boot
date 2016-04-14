@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: production
+
+
+aliPay:
+   syncLogPath: /data/mysite/tools/mysite_logs/aliPay_log/sync/
+   aSyncLogPath: /data/mysite/tools/mysite_logs/aliPay_log/aSync/
