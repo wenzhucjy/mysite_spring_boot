@@ -1,5 +1,10 @@
 .gradle
 build/
+out/
+/*/build
+/mysite_common/build
+/mysite_web/build
+
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -9,3 +14,14 @@ gradle-app.setting
 
 # Cache of project
 .gradletasknamecache
+
+# Java template
+*.class
+
+# Intellij #
+.idea/
+*.iml
+*.iws
+classes/
+
+
