@@ -7,11 +7,11 @@ buildscript {
     }
     
     repositories {
-        // maven { url 'http://maven.oschina.net/content/groups/public/' }
-//        mavenCentral()
         maven {
-            url "http://172.16.100.95:8091/nexus/content/groups/public/"
+            url 'http://maven.oschina.net/content/groups/public/'
         }
+//        mavenCentral()
+
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
