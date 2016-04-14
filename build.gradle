@@ -21,14 +21,16 @@ subprojects {
     repositories {
 
         // 依赖是从本地的Maven仓库中获取的
-//        mavenLocal()
-//        mavenCentral()
+        //        mavenLocal()
+        //        mavenCentral()
 
-        maven {
-            url "http://172.16.100.95:8091/nexus/content/groups/public/"
-        }
+       //  maven {
+        //     url "http://172.16.100.95:8091/nexus/content/groups/public/"
+       //  }
         //使用开源中国的maven仓库
-//        maven { url 'http://maven.oschina.net/content/groups/public/' }
+       maven {
+            url 'http://maven.oschina.net/content/groups/public/' 
+       }
     }
 
     sourceCompatibility = 1.8
