@@ -12,6 +12,14 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
  */
 public class WebInitializer extends SpringBootServletInitializer {
 
+    //@Bean
+    //@Order
+    //public ServletRegistrationBean statViewServlet() {
+    //    StatViewServlet servlet = new StatViewServlet();
+    //    ServletRegistrationBean bean = new ServletRegistrationBean(servlet, "/druid/*");
+    //    return bean;
+    //}
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(WebApplication.class);

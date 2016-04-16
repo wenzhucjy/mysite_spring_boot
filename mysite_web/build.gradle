@@ -7,10 +7,14 @@ buildscript {
     }
     
     repositories {
-        maven {
-            url 'http://maven.oschina.net/content/groups/public/'
+        repositories {
+            mavenLocal()
+//            mavenCentral()
+            maven {
+                //nexus 仓库地址
+                url "http://172.16.100.95:8091/nexus/content/groups/public/"
+            }
         }
-//        mavenCentral()
 
     }
     dependencies {
@@ -23,7 +27,7 @@ apply plugin: 'spring-boot'
 apply plugin: 'application'
 apply plugin: 'war'
 
-mainClassName = 'com.anyfish.system.WebApplication'
+mainClassName = 'com.github.mysite.web.WebApplication'
 
 war {
     //Change name of generated war file and duplicate war file - jdk8 api
@@ -49,6 +53,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-redis")
 
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+
+    compile("org.springframework.boot:spring-boot-starter-jdbc")
 
     // testCompile("junit:junit")
     testCompile("org.springframework.boot:spring-boot-starter-test")
