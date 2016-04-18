@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 /**
  * description: MyBatisConfig 配置
  *
- * @author : jy.chenUserMapper.xml
+ * @author : jy.chen
  * @version : 1.0
  * @since : 2016-04-16 11:12
  */
