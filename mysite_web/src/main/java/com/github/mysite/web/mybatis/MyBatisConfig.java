@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -16,6 +17,8 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
+
+import javax.sql.DataSource;
 
 /**
  * description: MyBatisConfig 配置
@@ -37,11 +40,17 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
     @Autowired
     private DruidConfig         druidConfig;
 
+    @Primary //默认数据源
+    @Bean(name = "dataSource",initMethod = "init",destroyMethod = "close")
+    public DataSource mysqlDataSource() {
+        return druidConfig.mysqlDataSource();
+    }
+
     @Bean(name = "sqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactoryBean() {
+    public SqlSessionFactory sqlSessionFactoryBean(DataSource dataSource) {
 
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(druidConfig.mysqlDataSource());
+        sqlSessionFactoryBean.setDataSource(dataSource);
 
         sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
 

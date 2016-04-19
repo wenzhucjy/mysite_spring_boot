@@ -116,6 +116,7 @@ public class DruidConfig {
             // 配置数据源，提示Druid数据源需要对数据库密码进行解密，需配置 config.decrypt=true,config.decrypt.key=${publicKey}，并且设置filters="config..."
             prop.setProperty("config.decrypt", "true");
             prop.setProperty("config.decrypt.key","MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALxGD+7b5TFusE2q0/qy5YRcVjTWH9GVkM/1n3VM8rynbLSbhYRLgZW9imPgj2dXlQ+chpAc5qUB9QTSPaDZaRECAwEAAQ==");
+            prop.setProperty("druid.stat.mergeSql","true");//SQL合并配置
             druidDataSource.setConnectProperties(prop);
 
             // Unknown system variable 'language' 找到问题，mysql-connector-java-5.1.36.jar 版本太高了

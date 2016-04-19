@@ -23,6 +23,8 @@ spring:
       poolPreparedStatements: true
       maxOpenPreparedStatements: 20
 
-aliPay:
-   syncLogPath: /var/log/mysite/aliPay_log/sync/
-   aSyncLogPath: /var/log/mysite/aliPay_log/aSync/
+druid:
+  loginUsername: anyfish
+  loginPassword: YzByCg
+  allow:
+  deny:
